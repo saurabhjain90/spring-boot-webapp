@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SentimentAnalysisWebApp {
 
-	//main
+	//main class
 	public static void main(String[] args) {
 		System.out.println("Starting SentimentAnalysisWebApp...");
 		System.out.println("hotfix");
