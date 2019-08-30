@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                snDevOpsStep(stepSysId:'f9dbf90253d33300', ignoreFailure: true)
+                snDevOpsStep(stepSysId:'f9dbf90253d33300', ignoreFailure: false)
                 sleep 1
             }
         }
