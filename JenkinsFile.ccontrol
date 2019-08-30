@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                snDevOpsStep 'f9dbf90253d33300'
+                snDevOpsStep(stepSysId:'f9dbf90253d33300', ignoreFailure: false)
                 sleep 1
             }
         }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 snDevOpsStep 'f1dbf90253d333007109ddeeff7b12f4'
-                snDevOpsChange( disabled:true)
+                snDevOpsChange( ignoreFailure:true)
                 sleep 1
             }
         }
