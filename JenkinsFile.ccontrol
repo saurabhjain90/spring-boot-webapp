@@ -5,22 +5,22 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                snDevOpsStep(stepSysId:'f9dbf90253d33300', ignoreFailure: true)
+                snDevOpsStep(stepSysId:'28c61aa2532733007109ddeeff7b127b', ignoreFailure: false)
                 sleep 1
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                snDevOpsStep(stepSysId:'f5dbf90253d333007109ddeeff7b12f4', disabled:false)
+                snDevOpsStep(stepSysId:'20c61aa2532733007109ddeeff7b127c', disabled:false)
                 sleep 1
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                snDevOpsStep 'f1dbf90253d333007109ddeeff7b12f4'
-                snDevOpsChange( ignoreFailure:true)
+                snDevOpsStep 'a0c61aa2532733007109ddeeff7b127c'
+                snDevOpsChange( ignoreFailure:true, disabled:true)
                 sleep 1
             }
         }
