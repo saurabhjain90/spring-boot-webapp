@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 snDevOpsStep 'a0c61aa2532733007109ddeeff7b127c'
-                snDevOpsChange( ignoreFailure:true, disabled:true)
+                snDevOpsChange( ignoreFailure:false, disabled:true)
                 sleep 1
             }
         }
