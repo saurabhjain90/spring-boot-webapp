@@ -2,18 +2,18 @@ def tasks = [:]
 
 tasks["task_1"] = {
   stage ("task_1"){    
-  //  node('label_example1') {  
+    node {  
         sh 'echo task_1'
         sh 'sleep 10'
-  //  }
+    }
   }
 }
 tasks["task_2"] = {
   stage ("task_2"){    
-    //node('label_example2') {  
+    node {  
         sh 'echo task_2'
         sh 'sleep 10'
-   // }
+    }
   }
 }
 
