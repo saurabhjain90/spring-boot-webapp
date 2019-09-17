@@ -7,7 +7,7 @@ for (int i = 0; i < 4 ; i++) {
             branches["branch_${branch}"] = { 
                 node {
                     sh "echo 'index: ${index}, i: ${i}, testListVal: " + testList[index] + "'"
-                    sh "sleep 5"
+                    sh 'sleep 5'
                 }
             }
       }
