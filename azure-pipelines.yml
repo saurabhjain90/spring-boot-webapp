@@ -14,7 +14,7 @@ stages:
   jobs:
   - job: BuildJob
     steps:
-    - script: mvn clean intall
+    - script: mvn clean install
 - stage: Test
   jobs:
   - job: TestOnWindows
