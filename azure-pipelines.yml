@@ -14,7 +14,7 @@ stages:
   jobs:
   - job: BuildJob
     steps:
-    - script: echo Building!
+    - script: mvn clean intall
 - stage: Test
   jobs:
   - job: TestOnWindows
@@ -22,7 +22,7 @@ stages:
     - script: echo Testing on Windows!
   - job: TestOnLinux
     steps:
-    - script: echo Testing on Linux!
+    - script: mvn test
 - stage: Deploy
   jobs:
   - job: Deploy
