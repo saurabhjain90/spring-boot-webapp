@@ -14,41 +14,18 @@ stages:
   jobs:
   - job: BuildJob
     steps:
-    - task: ServiceNow-DevOps-Server-Job-Notification@1
-      inputs:
-        connectedServiceName: 'nitinp2mad'
-        Phase: 'STARTED'
     - script: mvn clean install
-    - task: ServiceNow Job Notification@1
-      inputs:
-        connectedServiceName: 'nitinp2mad'
-        Phase: 'COMPLETED'
 - stage: Test
   jobs:
   - job: TestOnWindows
     steps:
-    - task: ServiceNow Job Notification@1
-      inputs:
-        connectedServiceName: 'nitinp2mad'
-        Phase: 'STARTED'
     - script: echo Testing on Windows!
   - job: TestOnLinux
     steps:
     - script: mvn test
-    - task: ServiceNow Job Notification@1
-      inputs:
-        connectedServiceName: 'nitinp2mad'
-        Phase: 'STARTED'
 - stage: Deploy
   jobs:
   - job: Deploy
     steps:
-    - task: ServiceNow Job Notification@1
-      inputs:
-        connectedServiceName: 'nitinp2mad'
-        Phase: 'STARTED'
     - script: echo Deploying the code!
-    - task: ServiceNow Job Notification@1
-      inputs:
-        connectedServiceName: 'nitinp2mad'
-        Phase: 'COMPLETED'
+
