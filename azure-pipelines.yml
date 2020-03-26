@@ -14,6 +14,10 @@ stages:
   jobs:
   - job: BuildJob
     steps:
+    - task: ServiceNow-DevOps-Server-Job-Notification@1
+      inputs:
+        connectedServiceName: 'nitinp2mad'
+        Phase: 'STARTED'
     - script: mvn clean install
     - task: ServiceNow Job Notification@1
       inputs:
