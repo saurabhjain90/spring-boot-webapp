@@ -21,12 +21,13 @@ stages:
     - script: mvn clean install
 - stage: Test
   jobs:
-  - job: TestOnWindows
+  - job: Test
     steps:
+    - task: ServiceNow-DevOps-Agent-Job-Notification@1
+      inputs:
+        connectedServiceName: 'nitinp2mad2'
+        Phase: 'STARTED'
     - script: echo Testing on Windows!
-  - job: TestOnLinux
-    steps:
-    - script: mvn test
 - stage: Deploy
   jobs:
   - job: Deploy
