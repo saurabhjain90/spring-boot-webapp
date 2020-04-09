@@ -6,8 +6,8 @@
 trigger:
 - master
 
-# pool: server
-#  vmImage: 'ubuntu-latest'
+pool: 
+  vmImage: 'ubuntu-latest'
 
 jobs:
   - job: Build
@@ -17,7 +17,7 @@ jobs:
       inputs:
         connectedServiceName: 'nitinp2mad2'
         Phase: 'STARTED'
-    - script: mvn clean install
+    # - script: mvn clean install
     - task: ServiceNow-DevOps-Server-Job-Notification@1
       inputs:
         connectedServiceName: 'nitinp2mad2'
@@ -31,7 +31,7 @@ jobs:
         connectedServiceName: 'nitinp2mad2'
         UpstreamJob: 'Build'
         Phase: 'STARTED'
-    - script: echo Testing on Windows!
+    # - script: echo Testing on Windows!
     - task: ServiceNow-DevOps-Server-Job-Notification@1
       inputs:
         connectedServiceName: 'nitinp2mad2'
@@ -46,7 +46,7 @@ jobs:
         connectedServiceName: 'nitinp2mad2'
         UpstreamJob: 'Test'
         Phase: 'STARTED'
-    - script: echo Deploying the code!
+    # - script: echo Deploying the code!
     - task: ServiceNow-DevOps-Server-Job-Notification@1
       inputs:
         connectedServiceName: 'nitinp2mad2'
