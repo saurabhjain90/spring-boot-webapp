@@ -1,0 +1,54 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool: 
+  vmImage: 'ubuntu-latest'
+
+jobs:
+  - job: Build
+    pool : server
+    steps:
+    - task: ServiceNow-DevOps-Server-Job-Notification@1
+      inputs:
+        connectedServiceName: 'nitinp2mad2'
+        Phase: 'STARTED'
+    # - script: mvn clean install
+    - task: ServiceNow-DevOps-Server-Job-Notification@1
+      inputs:
+        connectedServiceName: 'nitinp2mad2'
+        Phase: 'COMPLETED'
+  - job: Test
+    pool : server
+    dependsOn: Build
+    steps:
+    - task: ServiceNow-DevOps-Server-Job-Notification@1
+      inputs:
+        connectedServiceName: 'nitinp2mad2'
+        UpstreamJob: 'Build'
+        Phase: 'STARTED'
+    # - script: echo Testing on Windows!
+    - task: ServiceNow-DevOps-Server-Job-Notification@1
+      inputs:
+        connectedServiceName: 'nitinp2mad2'
+        UpstreamJob: 'Build'
+        Phase: 'COMPLETED'
+  - job: Deploy
+    pool : server
+    dependsOn: Test
+    steps:
+    - task: ServiceNow-DevOps-Server-Job-Notification@1
+      inputs:
+        connectedServiceName: 'nitinp2mad2'
+        UpstreamJob: 'Test'
+        Phase: 'STARTED'
+    # - script: echo Deploying the code!
+    - task: ServiceNow-DevOps-Server-Job-Notification@1
+      inputs:
+        connectedServiceName: 'nitinp2mad2'
+        UpstreamJob: 'Test'
+        Phase: 'COMPLETED'
