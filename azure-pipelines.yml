@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
-  - job: Build
+  - job: 'Build'
     steps:
     - task: ServiceNow-DevOps-Agent-Job-Notification@1
       inputs:
@@ -21,23 +21,23 @@ jobs:
       inputs:
         connectedServiceName: 'nitinp2mad2'
         Phase: 'COMPLETED'
-  - job: Test
-    dependsOn: Build
+  - job: 'Test'
+    dependsOn: 'Build'
     steps:
     - task: ServiceNow-DevOps-Agent-Job-Notification@1
       inputs:
-        connectedServiceName: 'nitinp2mad2'
-        UpstreamJob: 'Build'
-        Phase: 'STARTED'
+       connectedServiceName: 'nitinp2mad2'
+       upstream: 'Build'
+       Phase: 'STARTED'
     - script: echo Testing on Windows!
     - task: ServiceNow-DevOps-Agent-Job-Notification@1
       inputs:
         connectedServiceName: 'nitinp2mad2'
-        UpstreamJob: 'Build'
+        upstream: 'Build'
         Phase: 'COMPLETED'
-  - job: Deploy
+  - job: 'Deploy'
     pool : server
-    dependsOn: Test
+    dependsOn: 'Test'
     steps:
     - task: ServiceNow-DevOps-Server-Job-Notification@1
       inputs:
@@ -45,6 +45,10 @@ jobs:
         UpstreamJob: 'Test'
         Phase: 'STARTED'
     # - script: echo Deploying the code!
+    - task: ServiceNow-DevOps-Server-Change-Acceleration@1
+      inputs:
+        connectedServiceName: 'nitinp2mad2'
+        UpstreamJob: 'Test'
     - task: ServiceNow-DevOps-Server-Job-Notification@1
       inputs:
         connectedServiceName: 'nitinp2mad2'
