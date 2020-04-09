@@ -12,13 +12,14 @@ pool:
 stages:
 - stage: Build
   jobs:
-  - job: BuildJob
+  - job: Build
     steps:
     - task: ServiceNow-DevOps-Agent-Job-Notification@1
       inputs:
         connectedServiceName: 'nitinp2mad2'
         Phase: 'STARTED'
     - script: mvn clean install
+    
 - stage: Test
   jobs:
   - job: Test
@@ -26,6 +27,7 @@ stages:
     - task: ServiceNow-DevOps-Agent-Job-Notification@1
       inputs:
         connectedServiceName: 'nitinp2mad2'
+        upstream: 'Build'
         Phase: 'STARTED'
     - script: echo Testing on Windows!
 - stage: Deploy
