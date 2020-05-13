@@ -6,7 +6,7 @@
 trigger:
 - master
 
-pool: 
+pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
@@ -16,7 +16,17 @@ jobs:
       inputs:
         connectedServiceName: 'nitinp2mad2'
         Phase: 'STARTED'
-    - script: mvn clean install
+    # - script: mvn clean install -DskipTests
+    - task: Maven@3
+      name: 'Build'
+      displayName: 'Build'
+      inputs:
+        mavenPomFile: 'pom.xml'
+        mavenOptions: '-DskipTests -Xmx3072m'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.8'
+        jdkArchitectureOption: 'x64'
+        goals: 'clean install'
     - task: ServiceNow-DevOps-Agent-Job-Notification@1
       inputs:
         connectedServiceName: 'nitinp2mad2'
@@ -29,7 +39,20 @@ jobs:
        connectedServiceName: 'nitinp2mad2'
        upstream: 'Build'
        Phase: 'STARTED'
-    - script: echo Testing on Windows!
+    # - script: mvn test
+    - task: Maven@3
+      name: 'Test'
+      displayName: 'Test'
+      inputs:
+        goals: 'test'
+        mavenPomFile: 'pom.xml'
+        mavenOptions: '-Xmx3072m'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.8'
+        jdkArchitectureOption: 'x64'
+        publishJUnitResults: true
+        testResultsFiles: '**/target/surefire-reports/*.xml'
+        testRunTitle: 'Test'
     - task: ServiceNow-DevOps-Agent-Job-Notification@1
       inputs:
         connectedServiceName: 'nitinp2mad2'
@@ -54,4 +77,3 @@ jobs:
         connectedServiceName: 'nitinp2mad2'
         UpstreamJob: 'Test'
         Phase: 'COMPLETED'
-
