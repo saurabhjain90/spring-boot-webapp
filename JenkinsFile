@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     stages {
         stage('Build') {
             steps {
@@ -20,7 +19,7 @@ pipeline {
             steps {
                snDevOpsStep()
                 echo 'Deploying....'
-                sleep 3
+                sleep 4
             }
         }
     }
