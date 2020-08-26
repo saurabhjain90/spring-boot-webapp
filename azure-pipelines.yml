@@ -22,6 +22,32 @@ jobs:
         jdkVersionOption: '1.8'
         jdkArchitectureOption: 'x64'
         goals: 'clean install'
+    - task: InvokeRESTAPI@1
+      inputs:
+        connectionType: 'connectedServiceName'
+        serviceConnection: 'devopsoutsideintesting'
+        method: 'POST'
+        body: |
+          {
+             "artifacts":[
+                {
+                   "name":"sp-boot-app1",
+                   "version":"1.$(build.buildId)",
+                   "semanticVersion":"1.$(build.buildId).0",
+                   "repositoryName":"sp-boot-repo"
+                },
+                {
+                   "name":"sp-boot-app2",
+                   "version":"1.$(build.buildId)",
+                   "semanticVersion":"1.$(build.buildId).0",
+                   "repositoryName":"sp-boot-repo"
+                }
+             ],
+             "pipelineName":"$(system.teamProject)/$(build.definitionName)",
+             "taskExecutionNumber":"$(build.buildId)",
+             "stageName":"$(system.jobDisplayName)",
+        urlSuffix: '/artifact/registration/orchestrationToolId=8805a136dbfad810c93442c505961929'
+        waitForCompletion: 'false'
   - job: 'Test'
     dependsOn: 'Build'
     steps:
