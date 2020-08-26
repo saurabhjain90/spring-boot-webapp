@@ -39,7 +39,7 @@ jobs:
         testResultsFiles: '**/target/surefire-reports/*.xml'
         testRunTitle: 'Test'
   - job: 'Deploy'
-    pool : server
+    # pool : server
     dependsOn: 'Test'
     steps:
     - script: echo Deploying the code!
