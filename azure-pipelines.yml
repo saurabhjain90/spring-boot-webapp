@@ -43,6 +43,8 @@ jobs:
              "pipelineName":"$(system.teamProject)/$(build.definitionName)",
              "taskExecutionNumber":"$(build.buildId)",
              "stageName":"$(system.jobDisplayName)",
+             "branchName": "$(build.sourceBranchName)"
+          }
         urlSuffix: '/artifact/registration?orchestrationToolId=8805a136dbfad810c93442c505961929'
         waitForCompletion: 'false'
   - job: 'Test'
