@@ -31,7 +31,7 @@ stages:
     - task: InvokeRESTAPI@1
       inputs:
         connectionType: 'connectedServiceName'
-        serviceConnection: 'devopsoutsideintesting'
+        serviceConnection: 'nitinp2mad'
         method: 'POST'
         body: |
           {
@@ -76,7 +76,7 @@ stages:
       - task: InvokeRESTAPI@1
         inputs:
           connectionType: 'connectedServiceName'
-          serviceConnection: 'devopsoutsideintesting'
+          serviceConnection: 'nitinp2mad'
           method: 'POST'
           body: |
             {
