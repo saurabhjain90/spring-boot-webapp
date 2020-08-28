@@ -48,7 +48,7 @@ stages:
             "stageName":"$(system.jobDisplayName)",
             "branchName": "$(build.sourceBranchName)"
           }
-        urlSuffix: '/artifact/registration?orchestrationToolId=8805a136dbfad810c93442c505961929'
+        urlSuffix: '/artifact/registration?orchestrationToolId=f00baf871b7ad410e2c4fcc4cc4bcb43'
         waitForCompletion: 'false'
 
 - stage: TestAndPackage
@@ -92,7 +92,7 @@ stages:
               "stageName": "$(system.jobDisplayName)",
               "branchName": "$(build.sourceBranchName)"
             }
-          urlSuffix: '/package/registration?orchestrationToolId=8805a136dbfad810c93442c505961929'
+          urlSuffix: '/package/registration?orchestrationToolId=f00baf871b7ad410e2c4fcc4cc4bcb43'
           waitForCompletion: 'false'
 
 - stage: Deploy
