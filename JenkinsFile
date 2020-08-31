@@ -11,14 +11,14 @@ pipeline {
         stage('Test') {
             steps {
                snDevOpsStep()
-                echo 'Testing..'
+                echo 'Testing...'
                 sleep 3
             }
         }
         stage('Deploy') {
             steps {
                snDevOpsStep()
-                echo 'Deploying....'
+                echo 'Deploying...'
                 sleep 4
             }
         }
