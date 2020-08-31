@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 snDevOpsStep()
-                echo 'Building..'
+                echo 'Compiling and Building..'
                 sh 'printenv'
             }
         }
