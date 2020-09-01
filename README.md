@@ -33,5 +33,6 @@ Use this one in the command.
 
 ## Pushing the container-
 ` $ docker push $DOCKER_USER_ID/sentiment-analysis-web-app `
+added new line
 
 
