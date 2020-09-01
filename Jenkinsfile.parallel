@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+    stages {
+
+        stage('Build') {
+            steps {
+                snDevOpsStep()
+                echo 'Compiling and Building..'
+                sh 'printenv'
+            }
+        }
+
+        stage('Test') {
+			stages {
+                stage('unit test'){
+                    steps {
+                       snDevOpsStep()
+                        echo 'Unit Testing...'
+                        sleep 3
+                    }
+                }
+                stage('integ test'){
+					steps {
+                      snDevOpsStep()
+                      echo 'Integration Testing...'
+                      sleep 3
+					}
+                }
+			}
+        }
+
+        stage('Deploy') {
+            steps {
+               snDevOpsStep()
+               //snDevOpsChange()
+               echo 'Deploying...'
+               sleep 3
+            }
+        }
+    }
+}
