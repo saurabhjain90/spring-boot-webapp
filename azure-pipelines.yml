@@ -24,13 +24,14 @@ stages:
         jdkVersionOption: '1.8'
         jdkArchitectureOption: 'x64'
         goals: 'clean install'
-  - job: 'PublishArtifact'
-    dependsOn: 'Build'
-    steps:
     - task: PublishBuildArtifacts@1
       inputs:
         pathToPublish: '/home/vsts/work/1/s/target/sentiment-analysis-web-0.0.1-SNAPSHOT.jar'
         artifactName: sentiment-analysis.jar
+  - job: 'PublishArtifact'
+    pool: server
+    dependsOn: 'Build'
+    steps:
     - task: InvokeRESTAPI@1
       inputs:
         connectionType: 'connectedServiceName'
