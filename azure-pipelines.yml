@@ -25,7 +25,6 @@ stages:
         jdkArchitectureOption: 'x64'
         goals: 'clean install'
   - job: 'PublishArtifact'
-    pool: server
     dependsOn: 'Build'
     steps:
     - task: PublishBuildArtifacts@1
