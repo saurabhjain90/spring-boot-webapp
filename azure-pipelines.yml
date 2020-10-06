@@ -28,6 +28,10 @@ stages:
     pool: server
     dependsOn: 'Build'
     steps:
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: '/home/vsts/work/1/s/target/sentiment-analysis-web-0.0.1-SNAPSHOT.jar'
+        artifactName: sentiment-analysis.jar
     - task: InvokeRESTAPI@1
       inputs:
         connectionType: 'connectedServiceName'
