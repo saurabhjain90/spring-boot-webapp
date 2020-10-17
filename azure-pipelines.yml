@@ -41,7 +41,7 @@ stages:
           {
             "artifacts":[
                 {
-                  "name":"sp-boot-app",
+                  "name":"_snowdevops.spring-boot-webapp",
                   "version":"1.$(build.buildId)",
                   "semanticVersion":"1.$(build.buildId).0",
                   "repositoryName":"sp-boot-repo"
@@ -86,7 +86,7 @@ stages:
             {
               "name": "sp-package",
               "artifacts":[ 
-                  {"name":"sp-boot-app",
+                  {"name":"_snowdevops.spring-boot-webapp",
                   "version":"1.$(build.buildId)", 
                   "repositoryName":"sp-boot-repo" 
                   }
