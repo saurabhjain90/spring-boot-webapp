@@ -44,7 +44,7 @@ stages:
                   "name":"_snowdevops.spring-boot-webapp",
                   "version":"1.$(build.buildId)",
                   "semanticVersion":"1.$(build.buildId).0",
-                  "repositoryName":"sp-boot-repo"
+                  "repositoryName":"snowdevops.spring-boot-webapp"
                 }
             ],
             "pipelineName":"$(system.teamProject)/$(build.definitionName)",
