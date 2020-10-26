@@ -11,19 +11,19 @@ pipeline {
         stage('Build') {
             agent any 
             steps {
-                //snDevOpsStep()
+                snDevOpsStep()
                 //snDevOpsChange()
                 echo 'Building..'
 		checkout scm
                 sh 'mvn --version'
 		sh 'mvn clean install -DskipTests'
-		snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"master"}""")
+		//snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"master"}""")
             }
         }
         stage('Test') {
             agent any 
             steps {
-                //snDevOpsStep()
+                snDevOpsStep()
                 echo 'Testing..'
                 sh 'mvn test'
             }
@@ -36,15 +36,15 @@ pipeline {
 	    stage('package') { 
             	agent any 
             	steps {
-                	//snDevOpsStep()
+                	snDevOpsStep()
                 	echo 'Packaging..'
-			snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"master"}""")
+			//snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"master"}""")
             	}
             }
 	    stage('UAT') {
             	agent any 
             	steps {
-                	//snDevOpsStep()
+                	snDevOpsStep()
                 	echo 'Testing again..'
 			sh 'mvn -Dtest=com.integration.* clean test'
             	}
@@ -57,7 +57,7 @@ pipeline {
 	    stage('Deploy') {
              agent none
              steps {
-               //snDevOpsStep()
+               snDevOpsStep()
 		snDevOpsChange()
                 echo 'Deploying..'
             }
