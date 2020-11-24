@@ -96,7 +96,7 @@ stages:
               "stageName": "$(system.jobDisplayName)",
               "branchName": "$(build.sourceBranchName)"
             }
-          urlSuffix: '/package/registration?orchestrationToolId=d78304441b3bd4107cf299c01a4bcb66'
+          urlSuffix: '/package/registration?orchestrationToolId=a2ded03bdb64a050ac381caa0b96192b'
           waitForCompletion: 'false'
 
 - stage: Deploy
@@ -106,3 +106,16 @@ stages:
     # pool : serve
     steps:
     - script: echo Deploying the code!
+    - task: InvokeRESTAPI@1
+      inputs:
+        connectionType: 'connectedServiceName'
+        serviceConnection: 'nitinp2mad'
+        method: 'POST'
+        body: |
+         {
+            "buildNumber": "$(build.buildId)",
+            "isMultiBranch": "true",
+            "branchName": "$(build.sourceBranchName)"
+         }
+        urlSuffix: 'orchestration/changeControl?toolId=a2ded03bdb64a050ac381caa0b96192b&toolType=jenkins'
+        waitForCompletion: 'true'
