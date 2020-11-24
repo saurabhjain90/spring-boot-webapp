@@ -103,7 +103,7 @@ stages:
   dependsOn: 'TestAndPackage'
   jobs:
   - job: 'Deploy'
-    # pool : serve
+    pool : server
     steps:
     - script: echo Deploying the code!
     - task: InvokeRESTAPI@1
@@ -117,5 +117,5 @@ stages:
             "isMultiBranch": "true",
             "branchName": "$(build.sourceBranchName)"
          }
-        urlSuffix: 'orchestration/changeControl?toolId=a2ded03bdb64a050ac381caa0b96192b&toolType=jenkins'
+        urlSuffix: 'orchestration/changeControl?toolId=a2ded03bdb64a050ac381caa0b96192b&toolType=ado'
         waitForCompletion: 'true'
