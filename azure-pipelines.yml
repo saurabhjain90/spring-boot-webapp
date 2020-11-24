@@ -105,7 +105,6 @@ stages:
   - job: 'Deploy'
     pool : server
     steps:
-    - script: echo Deploying the code!
     - task: InvokeRESTAPI@1
       inputs:
         connectionType: 'connectedServiceName'
