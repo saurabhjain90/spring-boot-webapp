@@ -22,20 +22,17 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building..'
-       
         rtMavenRun (
           tool: 'Maven',
           pom: 'pom.xml',
-          goals: 'install',
-          //opts: '-Dartifactory.publish.artifacts=true -Dartifactory.publish.buildInfo=true',
+          goals: '-U clean install -DskipTests',
           deployerId: 'maven-deployer1'
         )
         echo 'Build done..'
       }
     }
-    stage('Test') {
+    stage('Deploy') {
       steps {
-
          echo 'Publish start..'
          rtPublishBuildInfo(serverId: "sndevops-jfrog")
          echo 'Publish done..'
