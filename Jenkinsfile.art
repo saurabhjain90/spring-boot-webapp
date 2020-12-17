@@ -11,6 +11,11 @@ pipeline {
         echo 'Building..'
         checkout scm
         sh 'mvn clean install -DskipTests'
+        rtServer (
+          id: 'sndevops-jfrog',
+          url: 'https://sndevops.jfrog.io',
+          credentialsId: 'jfrog-token'
+        )
         rtUpload (
           serverId: 'sndevops-jfrog',
           spec: '''{
