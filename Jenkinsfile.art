@@ -15,7 +15,21 @@ pipeline {
                 echo 'Building..'
 		            checkout scm
                 sh 'mvn --version'
-		            sh 'mvn clean install -DskipTests'
+	       sh 'mvn clean install -DskipTests'
+	       rtUpload (
+    serverId: 'sndevops-jfrog',
+    spec: '''{
+          "files": [
+            {
+              "pattern": "sentiment-analysis*.jar",
+              "target": "/var/jenkins_home/workspace/spboot-np/target"
+            }
+         ]
+    }''',
+ 
+    buildName: ${env.BUILD_NAME},
+    buildNumber: ${env.BUILD_NUMBER}
+)
 
             }
         }
