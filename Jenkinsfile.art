@@ -1,16 +1,15 @@
 pipeline {
-  agent none
+  agent any
   tools {
     maven 'Maven'
   }
   stages {
     stage('Build') {
-      agent any
       steps {
-
         echo 'Building..'
-        checkout scm
+        //checkout scm
         sh 'mvn install -DskipTests'
+        echo 'Publish start..'
         rtServer (
           id: 'sndevops-jfrog',
           url: 'https://sndevops.jfrog.io',
@@ -29,10 +28,10 @@ pipeline {
           buildName: '${env.BUILD_NAME}',
           buildNumber: '${env.BUILD_NUMBER}'
         )
+        echo 'Publish done..'
       }
     }
     stage('Test') {
-      agent any
       steps {
 
         echo 'Testing..'
