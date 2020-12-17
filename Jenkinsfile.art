@@ -27,7 +27,7 @@ pipeline {
           tool: 'Maven',
           pom: 'pom.xml',
           goals: 'install',
-          opts: '-Dartifactory.publish.artifacts=true -Dartifactory.publish.buildInfo=true',
+          //opts: '-Dartifactory.publish.artifacts=true -Dartifactory.publish.buildInfo=true',
           deployerId: 'maven-deployer1'
         )
         echo 'Build done..'
