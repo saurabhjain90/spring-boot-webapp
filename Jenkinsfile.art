@@ -8,7 +8,7 @@ pipeline {
         steps {
           rtServer (
             id: 'sndevops-jfrog',
-            //url: 'https://sndevops.jfrog.io',
+            url: 'https://sndevops.jfrog.io',
             credentialsId: 'jfrog-token'
           )
           rtMavenDeployer(
