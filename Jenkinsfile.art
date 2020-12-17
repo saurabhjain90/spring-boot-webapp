@@ -4,29 +4,33 @@ pipeline {
     maven 'Maven'
   }
   stages {
+    stage ('Artifactory setup'){
+        steps {
+          rtServer (
+            id: 'sndevops-jfrog',
+            url: 'https://sndevops.jfrog.io',
+            credentialsId: 'jfrog-token'
+          )
+          rtMavenDeployer(
+            id: "maven-deployer1",
+            serverId: "sndevops-jfrog",
+            releaseRepo: "libs-release",
+            snapshotRepo: "libs-release"
+          )
+        }
+    }
     stage('Build') {
       steps {
         echo 'Building..'
         //checkout scm
-        sh 'mvn install -DskipTests'
+        //sh 'mvn install -DskipTests'
         echo 'Publish start..'
-        rtServer (
-          id: 'sndevops-jfrog',
-          url: 'https://sndevops.jfrog.io',
-          credentialsId: 'jfrog-token'
-        )
-        rtUpload (
-          serverId: 'sndevops-jfrog',
-          spec: '''{
-                "files": [
-                  {
-                    "pattern": "sentiment-analysis*.jar",
-                    "target": "/var/jenkins_home/workspace/spboot-np/target"
-                  }
-               ]
-          }''',
-          buildName: '${env.BUILD_NAME}',
-          buildNumber: '${env.BUILD_NUMBER}'
+        rtMavenRun (
+          tool: 'Maven',
+          pom: 'pom.xml',
+          goals: 'install',
+          opts: '-Dartifactory.publish.artifacts=true -Dartifactory.publish.buildInfo=true',
+          deployerId: 'maven-deployer1'
         )
         echo 'Publish done..'
       }
