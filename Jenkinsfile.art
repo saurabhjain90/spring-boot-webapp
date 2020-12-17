@@ -10,7 +10,7 @@ pipeline {
 
         echo 'Building..'
         checkout scm
-        sh 'mvn clean install -DskipTests'
+        sh 'mvn install -DskipTests'
         rtServer (
           id: 'sndevops-jfrog',
           url: 'https://sndevops.jfrog.io',
@@ -36,7 +36,7 @@ pipeline {
       steps {
 
         echo 'Testing..'
-        sh 'mvn test'
+        //sh 'mvn test'
       }
     }
   }
