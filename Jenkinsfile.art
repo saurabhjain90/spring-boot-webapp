@@ -1,24 +1,18 @@
-def artifactname = "sp-boot-app"
-def repoName = "sp-boot-app-repo"
-def pkgName = "sp-boot-package"
-
 pipeline {
-    agent none
-    tools {
-    	maven 'Maven'
- 	  }
-    stages {
-        stage('Build') {
-            agent any 
-            steps {
+  agent none
+  tools {
+    maven 'Maven'
+  }
+  stages {
+    stage('Build') {
+      agent any
+      steps {
 
-                echo 'Building..'
-		            checkout scm
-                sh 'mvn --version'
-	       sh 'mvn clean install -DskipTests'
-	       rtUpload (
-    serverId: 'sndevops-jfrog',
-    spec: '''{
+        echo 'Building..'
+        checkout scm
+        sh 'mvn clean install -DskipTests'
+        rtUpload(
+        serverId: 'sndevops-jfrog', spec: '''{
           "files": [
             {
               "pattern": "sentiment-analysis*.jar",
@@ -26,9 +20,8 @@ pipeline {
             }
          ]
     }''',
- 
-    buildName: ${env.BUILD_NAME},
-    buildNumber: ${env.BUILD_NUMBER}
+
+        buildName: "${env.BUILD_NAME}", buildNumber: "${env.BUILD_NUMBER}""
 )
 
             }
@@ -43,3 +36,4 @@ pipeline {
         }
     }
 }
+"
