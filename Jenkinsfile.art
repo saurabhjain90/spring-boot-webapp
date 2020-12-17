@@ -1,0 +1,31 @@
+def artifactname = "sp-boot-app"
+def repoName = "sp-boot-app-repo"
+def pkgName = "sp-boot-package"
+
+pipeline {
+    agent none
+    tools {
+    	maven 'Maven'
+ 	  }
+    stages {
+        stage('Build') {
+            agent any 
+            steps {
+
+                echo 'Building..'
+		            checkout scm
+                sh 'mvn --version'
+		            sh 'mvn clean install -DskipTests'
+
+            }
+        }
+        stage('Test') {
+            agent any 
+            steps {
+           
+                echo 'Testing..'
+                sh 'mvn test'
+            }
+        }
+    }
+}
