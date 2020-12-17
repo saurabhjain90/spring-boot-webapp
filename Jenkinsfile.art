@@ -8,7 +8,7 @@ pipeline {
         steps {
           rtServer (
             id: 'sndevops-jfrog',
-            url: 'https://sndevops.jfrog.io',
+            //url: 'https://sndevops.jfrog.io',
             credentialsId: 'jfrog-token'
           )
           rtMavenDeployer(
@@ -22,9 +22,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building..'
-        //checkout scm
-        //sh 'mvn install -DskipTests'
-        echo 'Publish start..'
+       
         rtMavenRun (
           tool: 'Maven',
           pom: 'pom.xml',
@@ -32,14 +30,15 @@ pipeline {
           opts: '-Dartifactory.publish.artifacts=true -Dartifactory.publish.buildInfo=true',
           deployerId: 'maven-deployer1'
         )
-        echo 'Publish done..'
+        echo 'Build done..'
       }
     }
     stage('Test') {
       steps {
 
-        echo 'Testing..'
-        //sh 'mvn test'
+         echo 'Publish start..'
+         rtPublishBuildInfo(serverId: "sndevops-jfrog")
+         echo 'Publish done..'
       }
     }
   }
