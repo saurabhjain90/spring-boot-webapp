@@ -60,9 +60,9 @@ pipeline {
                snDevOpsStep()
 		snDevOpsChange()
                 echo 'Deploying..'
-		url -X GET "https://instance.servicenow.com/api/sn_devops/v1/devops/orchestration/changeInfo?toolId=1487f457db642810765555535e9619d3&pipelineName=Automation/apps HR/family release&stageName=deployfamilyrelease&buildNumber=1639" 
+		url -X GET "https://nitinpor2.service-now.com/api/sn_devops/v1/devops/orchestration/changeInfo?toolId=4d762de5dbeda810334266041b96194e&pipelineName=sp-boot-np&stageName=Deploy&buildNumber=${env.BUILD_NUMBER}" 
 -H "accept: application/json"\
--u "username":"password"
+-u "devops.integration.user":"devops"
             }
         }
     }
