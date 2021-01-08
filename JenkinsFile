@@ -64,8 +64,8 @@ pipeline {
 		curl -X GET \
 		-H "content-type: application/json" \
 		-u "devops.integration.user":"devops" \
-		"https://nitinpor2.service-now.com/api/sn_devops/v1/devops/orchestration/changeInfo?toolId=4d762de5dbeda810334266041b96194e&pipelineName=sp-boot-np&stageName=Deploy&buildNumber=${env.BUILD_NUMBER}"
-		"""
+		"pelineName=sp-boot-np&stageName=Deploy&buildNumber=${env.BUILD_NUMBER}"
+	
             }
         }
     }
