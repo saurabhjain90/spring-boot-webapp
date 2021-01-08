@@ -24,7 +24,7 @@ pipeline {
         echo 'Building..'
         rtMavenRun (
           tool: 'Maven',
-          pom: 'pom.xml,pom_1.xml',
+          pom: 'pom_1.xml',
           goals: '-U clean install -DskipTests',
           deployerId: 'maven-deployer1'
         )
