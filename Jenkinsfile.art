@@ -1,11 +1,12 @@
 pipeline {
   agent any
-  branch 'master'
+  
   tools {
     maven 'Maven'
   }
   stages {
     stage ('Artifactory setup'){
+    branch 'master'
         steps {
           rtServer (
             id: 'sndevops-jfrog',
@@ -21,6 +22,7 @@ pipeline {
         }
     }
     stage('Build') {
+    branch 'master'
       steps {
         echo 'Building..'
         rtMavenRun (
