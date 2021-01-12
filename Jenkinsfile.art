@@ -6,14 +6,16 @@ pipeline {
   }
   stages {
     stage ('Artifactory setup'){
-    branch 'master'
+   
         steps {
           rtServer (
+            branch: "master",
             id: 'sndevops-jfrog',
             url: 'https://sndevops.jfrog.io/artifactory',
             credentialsId: 'jfrog-token'
           )
           rtMavenDeployer(
+            branch: "master",
             id: "maven-deployer1",
             serverId: "sndevops-jfrog",
             releaseRepo: "libs-release",
@@ -22,12 +24,13 @@ pipeline {
         }
     }
     stage('Build') {
-    branch 'master'
+   
       steps {
         echo 'Building..'
         rtMavenRun (
           tool: 'Maven',
           pom: 'pom_1.xml',
+          branch: "master",
           goals: '-U clean install -DskipTests',
           deployerId: 'maven-deployer1'
         )
